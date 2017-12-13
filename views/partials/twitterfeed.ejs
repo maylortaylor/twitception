@@ -5,7 +5,7 @@
                 <span class="card-title"><h4 class=""><%= hashtag %></h4></span>
             </div>
         </div>
-        
+
         <div class="card indigo lighten-1 z-depth-4">
             <div class="card-content white-text">
                 <% tweets.forEach(function(tweet) { %>
@@ -15,6 +15,7 @@
                             <%= tweet.user.name %>
                         </h4>
                         <%= tweet.text %>
+                        <div> <%= moment(tweet.created_at).format(shortDateFormat) %></div>
                     </div>
                 <% }); %>
             </div>
