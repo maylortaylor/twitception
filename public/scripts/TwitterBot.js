@@ -1,7 +1,7 @@
 'use strict';
 var config = require('../../config');
 var Twit = require('Twit');
-
+var moment = require('moment');
 
 //
 /////  https://github.com/ttezel/twit
@@ -34,12 +34,14 @@ TwitterSpace.TwitterBot = function() {
             function gotData(err, data, response) {
                 if (err) return callback(err);
                 tweets = data.statuses;
-                //console.log(tweets);
+                if (tweets.length > 1) {
+                    tweets.forEach(tw => {
+                        tw.created_at = new moment(tw.created_at, 'dd MMM DD HH:mm:ss ZZ YYYY', 'en');
+                    });
+                }
+                console.log("TWEETS:", tweets);
 
                 if (!!tweets.length) {
-
-                    //console.log('gotData: ' + tweets.length);
-                    // return tweets;
                     resolve(tweets);
                 } else {
                     reject(Error("It broke"));

@@ -12,7 +12,7 @@ module.exports = function(config) {
     var self = this;
     self.Twit = new Twit(config.twit());
 
-    return { 
+    return {
         searchHastag: function(searchText, count, searchedHashTags, res) {
             var params = {
                 q: '#' + searchText,
@@ -20,40 +20,40 @@ module.exports = function(config) {
             }
 
             console.log('search text: ' + searchText)
-            
+
             self.Twit.get('search/tweets', params, gotData);
 
             function gotData(err, data, response) {
-                if(err) return console.log(err);
-                var tweets = data.statuses;    
+                if (err) return console.log(err);
+                var tweets = data.statuses;
 
 
                 var index = -1;
-                for(var i = 0, len = searchedHashTags.length; i < len; i++) {
+                for (var i = 0, len = searchedHashTags.length; i < len; i++) {
                     if (searchedHashTags[i].hashTag === searchText) {
                         index = i;
                         break;
                     }
                 }
-                
+
                 searchedHashTags[index].tweets = tweets;
 
                 searchedHashTags[index].tweets.forEach(function(tweet) {
                     var hashArr = (tweet.text.match(/#(\w+)/g));
 
-                    hashArr.forEach(function(h){
-                        hashtagArray.push(h);                            
+                    hashArr.forEach(function(h) {
+                        hashtagArray.push(h);
                     });
 
                 }, this);
-                    var uniqHashes = [];
+                var uniqHashes = [];
 
-                    _.uniq(hashtagArray).forEach(function(ht){
-                       uniqHashes.push(ht.toLowerCase());
-                    });
-                    
-                    hashtagArray = [];
-                    console.log(_.uniq(uniqHashes));
+                _.uniq(hashtagArray).forEach(function(ht) {
+                    uniqHashes.push(ht.toLowerCase());
+                });
+
+                hashtagArray = [];
+                console.log(_.uniq(uniqHashes));
 
                 res.render('pages/search', {
                     seachCriteria: searchText,
@@ -68,18 +68,18 @@ module.exports = function(config) {
 
     function matchInArray(string, expressions) {
 
-    var len = expressions.length,
-        i = 0;
+        var len = expressions.length,
+            i = 0;
 
-    for (; i < len; i++) {
-        if (string.match(expressions[i])) {
-            return true;
+        for (; i < len; i++) {
+            if (string.match(expressions[i])) {
+                return true;
+            }
         }
-    }
 
-    return false;
+        return false;
 
-};
+    };
 
 }
 
@@ -87,13 +87,13 @@ module.exports = function(config) {
 
 // TwitterBot.prototype.tweet = function(text, res) {
 //     var self = this;
-    
+
 //     if(typeof status !== 'string') {
 //         return callback(new Error('tweet must be of type String'));
 //     } else if(status.length > 140) {
 //         return callback(new Error('tweet is too long: ' + status.length));
 //     }
-    
+
 //     self.T.post('statuses/update', { text: text }, gotData);
 
 //     function gotData(err, data, response) {
@@ -126,7 +126,7 @@ module.exports = function(config) {
 //     //{ user_id: userName } // also can use user_id
 
 //     T.get('followers/ids', { username: userName }, gotData);
-    
+
 //     function gotData(err, data, response) {
 //         if(err) return callback(err);
 //             console.log('data',data);
@@ -138,7 +138,7 @@ module.exports = function(config) {
 //     var self = this;
 
 //     T.get('followers/ids', { slug: searchText }, gotData);
-    
+
 //     function gotData(err, data, response) {
 //         if(err) return callback(err);
 //             console.log('data',data);
@@ -163,12 +163,12 @@ module.exports = function(config) {
 // //
 // TwitterBot.prototype.favorite = function (params, callback) {
 //     var self = this;
-    
+
 //     self.twit.get('search/tweets', params, gotTweets);
 
 //     function gotTweets(err, data) {
 //         if(err) return callback(err);
-    
+
 //         var tweets = reply.statuses;
 //         var randomTweet = randIndex(tweets);
 //         if(typeof randomTweet != 'undefined')
@@ -186,18 +186,18 @@ module.exports = function(config) {
 
 //     function gotFollowers(err, data) {
 //         if(err) { return callback(err); }
-        
+
 //         var followers = data.ids
 //             , randFollower  = randIndex(followers);
-            
+
 //         self.twit.get('friends/ids', { user_id: randFollower }, randoFriended);
 
 //         function randoFriended(err, data){
 //             if(err) { return callback(err); }
-            
+
 //             var friends = data.ids
 //                 , target  = randIndex(friends);
-                
+
 //             self.twit.post('friendships/create', { id: target }, callback); 
 //         }
 //     }

@@ -1,55 +1,21 @@
-// var TwitterBot = require('../public/scripts/TwitterBotMethods.js');
-// var config = require('../config');
+var config = require('../config');
+var express = require('express');
+var bodyParser = require('body-parser');
+var _ = require('lodash');
 
-// var TwitBot = new TwitterBot(config);
-// function MainController(app) {
-//     this.app = app;
-//     this.Twit = new TwitterBot(config);
-//     this.routeTable = [];
-//     this.init();
-    
-// }
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-// MainController.prototype.init = function () {
-
-//     var self = this;
-//     this.addRoutes();
-//     this.processRoutes();
-// }
-
-// MainController.prototype.addRoutes = function () {
-//     var self = this;
-    
-//     self.routeTable.push({
-//         requestType: 'get',
-//         requestUrl: '/',
-//         callbackFunction: function (req, res) {
-//             res.render('/pages/index.ejs', { title: "Search Twitter"})
-//         }
-//     });
-
-//     self.routeTable.push({
-//         requestType: 'get',
-//         requestUrl: '/searchTwitter',
-//         callbackFunction: function (req, res) {
-//             res.render('pages/searchTwitter', { title: "Search Twitter"})
-//         }
-//     });
-// }
-// MainController.prototype.processRoutes = function() {
-//     var self = this;
-    
-//     self.routeTable.forEach(function(route) {        
-//         if (route.requestType == 'get') {
-//             console.log(route);
-//             self.app.get(route.requestUrl, route.callbackFunction)
-//         } else if (route.requestType == 'post') {
-
-//         } else if (route.requestType == 'delete') {
-
-//         }
-//     });
-// }
+var router = express.Router();
 
 
-// module.exports = MainController;
+router.get('/', function(req, res, next) {
+
+    var defaultSearchTerm = undefined;
+    var hashtagArray = undefined;
+
+    res.render('pages/main', {
+        dive: false
+    });
+});
+
+module.exports = router;

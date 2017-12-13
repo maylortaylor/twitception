@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
     var defaultSearchTerm = undefined;
     var hashtagArray = undefined;
 
-    res.render('pages/search', {
+    res.render('pages/main', {
         dive: false,
         seachCriteria: defaultSearchTerm !== undefined ? defaultSearchTerm : {},
         items: searchedTweets !== undefined ? searchedTweets : {},
@@ -45,7 +45,7 @@ router.get('/clear', function(req, res, next) {
         req.session.destroy();
     }
 
-    res.render('pages/search', {
+    res.render('pages/main', {
         dive: false,
         seachCriteria: searchTerm !== undefined ? searchTerm : {},
         items: searchedTweets !== undefined ? searchedTweets : {},
@@ -65,7 +65,7 @@ router.get('/search', function(req, res, next) {
         req.session.destroy();
     }
 
-    res.render('pages/search', {
+    res.render('pages/main', {
         dive: false,
         seachCriteria: searchTerm !== undefined ? searchTerm : {},
         items: searchedTweets !== undefined ? searchedTweets : {},
@@ -98,7 +98,7 @@ router.get('/dive', function(req, res, next) {
     crumbs = [];
     req.session.destroy();
 
-    res.render('pages/search', {
+    res.render('pages/main', {
         dive: true,
         seachCriteria: searchTerm !== undefined ? searchTerm : {},
         items: searchedTweets !== undefined ? searchedTweets : {},
@@ -177,14 +177,14 @@ router.post('/dive', function(req, res, next) {
                 // console.log(searchedTweets);
 
 
-                res.render('pages/search', {
+                res.render('pages/main', {
                     dive: true,
                     seachCriteria: searchTerm !== undefined ? searchTerm : {},
                     items: searchedTweets !== undefined ? searchedTweets : {},
                     siblingTags: hashtagArray !== undefined ? hashtagArray : {},
                     diveCrumbs: crumbs !== undefined ? crumbs : {}
                 });
-            }).catch(function(result) {
+            }).catch(function(err) {
                 console.log(err)
             });
     }
@@ -252,14 +252,14 @@ router.get('/dive/:searchText', function(req, res, next) {
                 // console.log(searchedTweets);
 
 
-                res.render('pages/search', {
+                res.render('pages/main', {
                     dive: true,
                     seachCriteria: searchTerm !== undefined ? searchTerm : {},
                     items: searchedTweets !== undefined ? searchedTweets : {},
                     siblingTags: hashtagArray !== undefined ? hashtagArray : {},
                     diveCrumbs: crumbs !== undefined ? crumbs : {}
                 });
-            }).catch(function(result) {
+            }).catch(function(err) {
                 console.log(err)
             });
     }
@@ -321,12 +321,12 @@ router.post('/search', function(req, res, next) {
 
                 // console.log(searchedTweets);
 
-                res.render('pages/search', {
+                res.render('pages/main', {
                     seachCriteria: searchTerm !== undefined ? searchTerm : {},
                     items: searchedTweets !== undefined ? searchedTweets : {},
                     siblingTags: hashtagArray !== undefined ? hashtagArray : {}
                 });
-            }).catch(function(result) {
+            }).catch(function(err) {
                 console.log(err)
             });
     }
