@@ -1,0 +1,47 @@
+.twitter-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+}
+
+.wrapper {
+    float: left;
+    height: 4em;
+    /* needs to be defined in this case so that the children know what they should be 100% height of */
+    /* just for show */
+    background-color: lightgray;
+    border: 1px solid red;
+    padding: .5em;
+}
+
+.tweet-box {
+    overflow: auto;
+    max-height: 50em;
+}
+
+.flex-container {
+    /* We first create a flex layout context */
+    display: flex;
+    /* Then we define the flow direction and if we allow the items to wrap 
+   * Remember this is the same as:
+   * flex-direction: row;
+   * flex-wrap: wrap;
+   */
+    flex-flow: row wrap;
+    flex-wrap: wrap;
+    /* Then we define how is distributed the remaining space */
+    justify-content: space-around;
+}
+
+.flex-item {
+    padding: 5px;
+    width: 250px;
+    flex-grow: 1;
+}
+
+.search-buttons button {
+    margin: 3px;
+}
+nav.breadcrumbs{
+    
+}

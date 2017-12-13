@@ -1,0 +1,19 @@
+<% if (locals.dive) { %>
+    <section class="section dive">
+        <% include ../partials/tweetDive %>
+    </section>
+<% } else { %>
+    <section class="section search">
+        <% include ../partials/tweetSearch %>
+    </section>
+<% } %>
+
+<section class="section flex-container">
+
+    <% if (locals.items) { %>
+        <% items.forEach(function(ht) { %>
+            <%- include("../partials/twitterfeed", {hashtag: ht.hashtag, tweets: ht.tweets}) %>
+        <% }); %>
+    <% } %>
+    
+</section>

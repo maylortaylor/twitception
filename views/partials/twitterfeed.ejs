@@ -1,0 +1,24 @@
+<div class="flex-item col tweet-box">
+    <div class=" ">
+        <div class="card purple lighten-1 z-depth-4">
+            <div class="card-content white-text">
+                <span class="card-title"><h4 class=""><%= hashtag %></h4></span>
+            </div>
+        </div>
+        
+        <div class="card indigo lighten-1 z-depth-4">
+            <div class="card-content white-text">
+                <% tweets.forEach(function(tweet) { %>
+                    <img class="twitter-img" src="<%= tweet.user.profile_image_url %>">
+                    <div class="">
+                        <h4>
+                            <%= tweet.user.name %>
+                        </h4>
+                        <%= tweet.text %>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+
+    </div>
+</div>
