@@ -165,11 +165,12 @@ router.post('/dive', function(req, res, next) {
 
                 tweetCollection.tweets.forEach(function(tweet) {
                     var hashArr = (tweet.text.match(/#(\w+)/g));
-                    hashArr.forEach(function(h) {
-                        //console.log(h);
-                        hashtagArray.push(h.toLowerCase());
-                    });
-
+                    if (!!hashArr && hashArr.length > 1) {
+                        hashArr.forEach(function(h) {
+                            //console.log(h);
+                            hashtagArray.push(h.toLowerCase());
+                        });
+                    }
                     hashtagArray = _.uniq(hashtagArray);
 
                 }, this);
@@ -240,10 +241,12 @@ router.get('/dive/:searchText', function(req, res, next) {
 
                 tweetCollection.tweets.forEach(function(tweet) {
                     var hashArr = (tweet.text.match(/#(\w+)/g));
-                    hashArr.forEach(function(h) {
-                        //console.log(h);
-                        hashtagArray.push(h.toLowerCase());
-                    });
+                    if (!!hashArr && hashArr.length > 1) {
+                        hashArr.forEach(function(h) {
+                            //console.log(h);
+                            hashtagArray.push(h.toLowerCase());
+                        });
+                    }
 
                     hashtagArray = _.uniq(hashtagArray);
 
@@ -310,10 +313,12 @@ router.post('/search', function(req, res, next) {
 
                 tweetCollection.tweets.forEach(function(tweet) {
                     var hashArr = (tweet.text.match(/#(\w+)/g));
-                    hashArr.forEach(function(h) {
-                        //console.log(h);
-                        hashtagArray.push(h.toLowerCase());
-                    });
+                    if (!!hashArr && hashArr.length > 1) {
+                        hashArr.forEach(function(h) {
+                            //console.log(h);
+                            hashtagArray.push(h.toLowerCase());
+                        });
+                    }
 
                     hashtagArray = _.uniq(hashtagArray);
 

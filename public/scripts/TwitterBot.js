@@ -26,7 +26,10 @@ TwitterSpace.TwitterBot = function() {
             }
             var params = {
                 q: searchtext,
-                count: count
+                count: count, //max = 100
+                lang: 'en',
+                result_type: 'mixed', //mixed, recent, popular
+                include_entities: true
             }
             console.log(params);
             T.get('search/tweets', params, gotData);
