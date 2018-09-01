@@ -25,3 +25,9 @@ if it does not work, just use the command below to start the server
 $ node server.js
 ```
 ### 4) Go to http://localhost:3000/ in your web browser
+
+
+# Using Docker
+### 1) Run `docker-compose up`
+
+### 2) Go to http://localhost:3000/ in your web browser

@@ -2,37 +2,16 @@ var Twit = require('../public/scripts/TwitterBot');
 var config = require('../config');
 var express = require('express');
 var bodyParser = require('body-parser');
-// var mongojs = require('mongojs');
-// var RSVP = require('rsvp');
 var _ = require('lodash');
-// var methodOverride = require('method-override');
-
-
-// var db = mongojs('mongodb://maylor0001:eHdDyEWjymmoUlrRGg66@ds050739.mlab.com:50739/twitterbot', ['tweets']);
-// var mycollection = db.collection('tweets');
 
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 var router = express.Router();
 
-
 var searchedTweets = [];
 var crumbs = [];
 
-
-router.get('/', function(req, res, next) {
-
-    var defaultSearchTerm = undefined;
-    var hashtagArray = undefined;
-
-    res.render('pages/main', {
-        dive: false,
-        seachCriteria: defaultSearchTerm !== undefined ? defaultSearchTerm : {},
-        items: searchedTweets !== undefined ? searchedTweets : {},
-        siblingTags: hashtagArray !== undefined ? hashtagArray : {}
-    });
-});
 
 router.get('/clear', function(req, res, next) {
 
@@ -45,7 +24,7 @@ router.get('/clear', function(req, res, next) {
         req.session.destroy();
     }
 
-    res.render('pages/main', {
+    res.render('pages/home', {
         dive: false,
         seachCriteria: searchTerm !== undefined ? searchTerm : {},
         items: searchedTweets !== undefined ? searchedTweets : {},
@@ -65,7 +44,7 @@ router.get('/search', function(req, res, next) {
         req.session.destroy();
     }
 
-    res.render('pages/main', {
+    res.render('pages/home', {
         dive: false,
         seachCriteria: searchTerm !== undefined ? searchTerm : {},
         items: searchedTweets !== undefined ? searchedTweets : {},
@@ -98,7 +77,7 @@ router.get('/dive', function(req, res, next) {
     crumbs = [];
     req.session.destroy();
 
-    res.render('pages/main', {
+    res.render('pages/home', {
         dive: true,
         seachCriteria: searchTerm !== undefined ? searchTerm : {},
         items: searchedTweets !== undefined ? searchedTweets : {},
@@ -178,7 +157,7 @@ router.post('/dive', function(req, res, next) {
                 // console.log(searchedTweets);
 
 
-                res.render('pages/main', {
+                res.render('pages/home', {
                     dive: true,
                     seachCriteria: searchTerm !== undefined ? searchTerm : {},
                     items: searchedTweets !== undefined ? searchedTweets : {},
@@ -255,7 +234,7 @@ router.get('/dive/:searchText', function(req, res, next) {
                 // console.log(searchedTweets);
 
 
-                res.render('pages/main', {
+                res.render('pages/home', {
                     dive: true,
                     seachCriteria: searchTerm !== undefined ? searchTerm : {},
                     items: searchedTweets !== undefined ? searchedTweets : {},
@@ -326,7 +305,7 @@ router.post('/search', function(req, res, next) {
 
                 // console.log(searchedTweets);
 
-                res.render('pages/main', {
+                res.render('pages/home', {
                     seachCriteria: searchTerm !== undefined ? searchTerm : {},
                     items: searchedTweets !== undefined ? searchedTweets : {},
                     siblingTags: hashtagArray !== undefined ? hashtagArray : {}

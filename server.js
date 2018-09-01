@@ -1,11 +1,6 @@
 var express = require('express');
+var expressLayouts = require('express-ejs-layouts');
 var app = express();
-// var RedisStore = require('connect-redis')(express);
-// var crypto = require('crypto');
-// const secret = 'user';
-// const hash = crypto.createHmac('sha256', secret)
-//                    .update('I love cupcakes')
-//                    .digest('hex');
 
 var bodyParser = require('body-parser');
 var session = require('express-session');
@@ -16,18 +11,11 @@ var shortDateFormat = "dddd MMM Do YYYY, @ h:mm:ss A"; // this is just an exampl
 app.locals.moment = moment; // this makes moment available as a variable in every EJS page
 app.locals.shortDateFormat = shortDateFormat;
 
-// var less = require('less');
-// var serverConfig = require('./serverConfig.json');
-
-// console.log(serverConfig);
-// var redis = require("redis").createClient(serverConfig.redisPort,serverConfig.redisHost);
-
-
 //
 ////ADD CONTROLLERS HERE
 //
 var search = require('./routes/search');
-var mainController = require('./routes/mainController');
+var homeController = require('./routes/homeController');
 
 app.use(session({
     resave: true,
@@ -60,27 +48,21 @@ function errorHandler(err, req, res, next) {
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 // parse application/json
 app.use(bodyParser.json());
-
-// override with different headers; last one takes precedence
-// app.use(methodOverride('X-HTTP-Method'))          // Microsoft
-// app.use(methodOverride('X-HTTP-Method-Override')) // Google/GData
-// app.use(methodOverride('X-Method-Override'))      // IBM
-// app.use(methodOverride());
 app.use(logErrors);
 app.use(clientErrorHandler);
 app.use(errorHandler);
+app.use(expressLayouts);
 // app.use(express.errorHandler(serverConfig.errorHandlerOptions));
 
-
-
-// set view engine (ejs, jade, ...)
+// set view engine
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 //
-////SET IN APP VARIABLES??
+////SET IN APP VARIABLES
 //
 app.use('/css', express.static(__dirname + '/public/css/'));
 app.use('/fonts', express.static(__dirname + '/public/fonts/'));
@@ -90,7 +72,7 @@ app.use('/scripts', express.static(__dirname + '/public/scripts/'));
 ////DEPEND ON CONTROLLERS HERE
 //
 app.use('/', search);
-app.use('/', mainController);
+app.use('/', homeController);
 
 //
 ////CREATE APP > LIST ON SERVER_PORT > CONSOLE LOG INFO

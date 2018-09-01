@@ -12,7 +12,7 @@
 
     <% if (locals.items) { %>
         <% items.forEach(function(ht) { %>
-            <%- include("../partials/twitterfeed", {hashtag: ht.hashtag, tweets: ht.tweets}) %>
+            <%- include("../views/partials/twitterfeed", {hashtag: ht.hashtag, tweets: ht.tweets}) %>
         <% }); %>
     <% } %>
 
