@@ -17,6 +17,7 @@ app.locals.shortDateFormat = shortDateFormat;
 var searchController = require('./routes/searchController');
 var homeController = require('./routes/homeController');
 var diveController = require('./routes/diveController');
+var tweetController = require('./routes/tweetController');
 
 app.use(session({
     resave: true,
@@ -75,6 +76,7 @@ app.use('/scripts', express.static(__dirname + '/public/scripts/'));
 app.use('/', searchController);
 app.use('/', homeController);
 app.use('/', diveController);
+app.use('/', tweetController);
 //
 ////CREATE APP > LIST ON SERVER_PORT > CONSOLE LOG INFO
 //

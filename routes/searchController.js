@@ -32,22 +32,6 @@ router.get('/search', function(req, res, next) {
     });
 });
 
-// router.get('/tweets', function(req, res, next) {
-//     db.tweets.find(function(err, tweets) {
-//         if (err) res.send(err);
-//         // console.log(tweets);
-//         res.json(tweets);
-//     })
-// });
-
-// router.get('/tweet/:id', function(req, res, next) {
-//     db.tweets.findOne({ _id: mongojs.ObjectId(req.params.id) }, function(err, tweet) {
-//         if (err) res.send(err);
-//         // console.log(tweet);
-//         res.json(tweet);
-//     })
-// });
-
 router.post('/search', function(req, res, next) {
     if (!req.body.searchText) {
         res.status(400);
