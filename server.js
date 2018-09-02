@@ -14,7 +14,7 @@ app.locals.shortDateFormat = shortDateFormat;
 //
 ////ADD CONTROLLERS HERE
 //
-var search = require('./routes/search');
+var searchController = require('./routes/searchController');
 var homeController = require('./routes/homeController');
 var diveController = require('./routes/diveController');
 
@@ -52,10 +52,10 @@ app.use(bodyParser.urlencoded({
 
 // parse application/json
 app.use(bodyParser.json());
+app.use(expressLayouts);
 app.use(logErrors);
 app.use(clientErrorHandler);
 app.use(errorHandler);
-app.use(expressLayouts);
 // app.use(express.errorHandler(serverConfig.errorHandlerOptions));
 
 // set view engine
@@ -72,7 +72,7 @@ app.use('/scripts', express.static(__dirname + '/public/scripts/'));
 //
 ////DEPEND ON CONTROLLERS HERE
 //
-app.use('/', search);
+app.use('/', searchController);
 app.use('/', homeController);
 app.use('/', diveController);
 //
